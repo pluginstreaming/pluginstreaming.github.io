@@ -1,0 +1,65 @@
+{
+  "version": "1",
+  "clients": [
+    {
+      "id": 1,
+      "name": "braz 001",
+      "password": "1056",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Debora",
+      "password": "0000",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "CLIENTE 3",
+      "password": "senha003",
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "CLIENTE 4",
+      "password": "senha004",
+      "active": true
+    },
+    {
+      "id": 5,
+      "name": "CLIENTE 5",
+      "password": "senha005",
+      "active": true
+    },
+    {
+      "id": 6,
+      "name": "CLIENTE 6",
+      "password": "senha006",
+      "active": false
+    },
+    {
+      "id": 7,
+      "name": "CLIENTE 7",
+      "password": "senha007",
+      "active": false
+    },
+    {
+      "id": 8,
+      "name": "CLIENTE 8",
+      "password": "senha008",
+      "active": false
+    },
+    {
+      "id": 9,
+      "name": "CLIENTE 9",
+      "password": "senha009",
+      "active": false
+    },
+    {
+      "id": 10,
+      "name": "CLIENTE 10",
+      "password": "senha010",
+      "active": false
+    }
+  ]
+}

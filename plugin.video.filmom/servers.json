@@ -1,0 +1,76 @@
+{
+  "schema": "filmom-servers-v1",
+  "version": "1",
+  "description": "Base independente de servidores do addon FILMOM. Use os dois servidores abaixo apenas como modelo e substitua por servidores reais.",
+  "instructions": {
+    "servers": "Adicione servidores reais dentro da lista servers. O FILMOM exibirá apenas servidores com url, user/username, pass/password e active=true.",
+    "active": "Use true para liberar o servidor e false para ocultar/bloquear.",
+    "example": {
+      "id": 1,
+      "name": "Servidor 1",
+      "url": "http://seu-servidor.com:80",
+      "user": "usuario-do-servidor",
+      "pass": "senha-do-servidor",
+      "active": true
+    }
+  },
+  "servers": [
+    {
+      "id": 1,
+      "name": "1",
+      "url": "http://magali.dellmxq.space",
+      "user": " nelsonalbu",
+      "pass": " Cliente1",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "url": "http://minastv.shop:80",
+      "user": "netinho10",
+      "pass": "Ballack1",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "3",
+      "url": "http://nandoultra.shop",
+      "user": "48394135",
+      "pass": "35534294",
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "4",
+      "url": "http://ragnatech.space",
+      "user": "649439123",
+      "pass": "879629940",
+      "active": true
+    },
+    {
+      "id": 5,
+      "name": "5",
+      "url": "http://minastv.shop:80",
+      "user": "regina050825",
+      "pass": "050825regina",
+      "active": true
+    },
+    {
+      "id": 6,
+      "name": "6",
+      "url": "http://xxfsxx.xyz:80",
+      "user": "422399402064",
+      "pass": "584419838695",
+      "active": true
+    },
+    {
+      "id": 7,
+      "name": "7",
+      "url": "http://megga10.top",
+      "user": "048824273",
+      "pass": "179123716",
+      "active": true
+      
+    }
+  ]
+}

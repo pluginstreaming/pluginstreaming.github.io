@@ -1,0 +1,85 @@
+{
+  "version": "1",
+  "servers": [
+    {
+      "id": 1,
+      "name": "1",
+      "url": "http://vidaloka.fun:80",
+      "user": "537264820",
+      "pass": "166641022",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "url": "http://ip10.cfd:80",
+      "user": "607385308",
+      "pass": "867678198",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "3",
+      "url": "http://amsplay.com:80",
+      "user": "766763",
+      "pass": "ScaHWe",
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "4",
+      "url": "http://amsplay.com:80",
+      "user": "9543894325",
+      "pass": "secure",
+      "active": true
+    },
+    {
+      "id": 5,
+      "name": "5",
+      "url": "http://amsplay.com:80",
+      "user": "251265",
+      "pass": "7WCG69",
+      "active": true
+    },
+    {
+      "id": 6,
+      "name": "6",
+      "url": "http://cdn200.vip",
+      "user": "Caio23",
+      "pass": "eT9817",
+      "active": true
+    },
+    {
+      "id": 7,
+      "name": "7",
+      "url": "http://ncplay.top:8080",
+      "user": "djsorriso2025",
+      "pass": "252128258",
+      "active": true
+    },
+    {
+      "id": 8,
+      "name": "8",
+      "url": "http://4s2tem.biz:80",
+      "user": "624885",
+      "pass": "M1RY6J",
+      "active": true
+    },
+    {
+      "id": 9,
+      "name": "9",
+      "url": "http://peercast.sbs:80",
+      "user": "23031167",
+      "pass": "40368769",
+      "active": true
+    },
+    {
+      "id": 10,
+      "name": "10",
+      "url": "http://p2bin.fun:80",
+      "user": "0578562929",
+      "pass": "6563253737",
+      "active": true
+    }
+  ]
+}

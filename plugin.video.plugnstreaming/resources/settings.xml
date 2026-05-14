@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+    <setting id="pin_ok" type="text" default="" label="PIN OK" visible="false"/>
+    <setting id="active_server" type="text" default="1" label="Servidor Ativo" visible="false"/>
+    <setting id="adult_pin" type="text" default="0000" label="PIN Adulto" visible="false"/>
+    <setting label="Qualidade do Stream" type="enum" id="stream_quality" values="Auto|HD|SD" default="0"/>
+    <setting label="Timeout (segundos)" type="slider" id="timeout" default="15" range="5,5,60" option="int"/>
+    <setting type="sep"/>
+    <setting label="Servidor 1 - URL" type="text" id="server1_url" default="http://dnscine.top:80"/>
+    <setting label="Servidor 1 - Usuario" type="text" id="server1_user" default="619126419"/>
+    <setting label="Servidor 1 - Senha" type="text" id="server1_pass" default="568627784" option="hidden"/>
+    <setting type="sep"/>
+    <setting label="Servidor 2 - URL" type="text" id="server2_url" default="http://corelinkdns.sbs:80"/>
+    <setting label="Servidor 2 - Usuario" type="text" id="server2_user" default="80766352hyyh"/>
+    <setting label="Servidor 2 - Senha" type="text" id="server2_pass" default="748t74417ut65" option="hidden"/>
+    <setting type="sep"/>
+    <setting label="Servidor 3 - URL" type="text" id="server3_url" default="http://newoneblue.site"/>
+    <setting label="Servidor 3 - Usuario" type="text" id="server3_user" default="CalangoDoido2"/>
+    <setting label="Servidor 3 - Senha" type="text" id="server3_pass" default="CalangoDoido2" option="hidden"/>
+</settings>

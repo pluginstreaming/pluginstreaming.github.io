@@ -1,0 +1,20 @@
+<settings>
+    <category label="FILMOM - Servidor">
+        <setting id="server_url" type="text" label="URL do servidor" default="" visible="false"/>
+        <setting id="username" type="text" label="Usuário" default="" visible="false"/>
+        <setting id="password" option="hidden" type="text" label="Senha" default="" visible="false"/>
+        <setting id="active_server_name" type="text" label="Servidor ativo" default="Servidor 1" visible="false"/>
+    </category>
+    <category label="FILMOM - Acesso remoto">
+        <setting id="clients_json_url" type="text" label="URL do clients.json" default="https://raw.githubusercontent.com/brazalvesjr/filmom-dist/main/clients.json"/>
+        <setting id="servers_json_url" type="text" label="URL do servers.json" default="https://raw.githubusercontent.com/brazalvesjr/filmom-dist/main/servers.json"/>
+        <setting id="client_password" option="hidden" type="text" label="Senha do cliente validada" default="" visible="false"/>
+        <setting id="authenticated_client" type="text" label="Cliente autenticado" default="" visible="false"/>
+        <setting id="hide_adult" type="bool" label="Ocultar conteúdo adulto" default="true"/>
+    </category>
+    <category label="FILMOM - Atualizações">
+        <setting id="github_manifest_url" type="text" label="URL do manifesto público" default="https://raw.githubusercontent.com/brazalvesjr/filmom-dist/main/manifest.json"/>
+        <setting id="auto_update" type="bool" label="Verificar atualizações automaticamente" default="true"/>
+        <setting id="network_timeout" type="number" label="Timeout de rede em segundos" default="10"/>
+    </category>
+</settings>
