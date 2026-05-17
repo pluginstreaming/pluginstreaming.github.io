@@ -21,6 +21,7 @@
 </addon>
 <addon id="plugin.video.pluginstreaming" version="1.1.3+matrix" name="[COLOR blue]Plugin[/COLOR][COLOR yellow]Streaming[/COLOR]" provider-name="Braz Junior">
 <requires>
+		<import addon="xbmc.python" version="3.0.0" />
 		<import addon="script.module.six" />
 		<import addon="script.module.kodi-six" />
 		<import addon="script.module.requests" optional="true"/>
@@ -43,13 +44,11 @@
     <news>
 [COLOR maroon]PROIBIDO USO DO ADD-ON EM OUTRA REPO SEM AUTORIZAÇÃO[/COLOR]
 </news>
+    <language>pt_BR</language>
     <platform>all</platform>
 	<assets>
 	<icon>icon.png</icon>
     <fanart>fanart.jpg</fanart>
-    <screenshot>resources/screenshots/1.jpg</screenshot>
-    <screenshot>resources/screenshots/2.jpg</screenshot>
-    <screenshot>resources/screenshots/3.jpg</screenshot>
 </assets>
   </extension>
 </addon>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.plugnstreaming" name="PLUGN STREAMING VIP" version="2.2.7" provider-name="PLUGN Team">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="pt_BR">PLUGN STREAMING VIP - Multiplos Servidores IPTV</summary>
+        <description lang="pt_BR">PLUGN STREAMING VIP - TV ao vivo, filmes e series com qualidade HD. Suporte a multiplos servidores com troca dinamica. Acesso protegido por PIN.</description>
+        <disclaimer lang="pt_BR">Este addon e fornecido como esta. O usuario e responsavel por cumprir com as leis locais.</disclaimer>
+        <language>pt_BR</language>
+        <platform>all</platform>
+        <license>GPL-2.0</license>
+        <assets>
+            <icon>icon.jpg</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>

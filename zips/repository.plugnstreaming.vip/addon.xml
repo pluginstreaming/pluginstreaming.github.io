@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.plugnstreaming.vip" name="PLUGINSTREAMING Repository" version="1.0.0" provider-name="PluginStreaming">
+    <extension point="xbmc.addon.repository">
+        <dir>
+            <info compressed="false">https://pluginstreaming.github.io/addons.xml</info>
+            <checksum>https://pluginstreaming.github.io/addons.xml.md5</checksum>
+            <datadir zip="true">https://pluginstreaming.github.io/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="pt_BR">Repositório oficial PluginStreaming para FILMOM, PLUGINSTREAMING e PLUGINSTREAMING VIP.</summary>
+        <description lang="pt_BR">Repositório Kodi para instalação e atualização automática dos addons FILMOM, PLUGINSTREAMING e PLUGINSTREAMING VIP.</description>
+        <platform>all</platform>
+        <language>pt_BR</language>
+        <license>Proprietary</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>

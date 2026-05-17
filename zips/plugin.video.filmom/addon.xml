@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<addon id="plugin.video.filmom" name="FILMOM" version="1.0.26" provider-name="FILMOM">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="pt_BR">FILMOM: central de mídia com interface moderna, base própria de servidores e catálogo com sinopses.</summary>
+        <description lang="pt_BR">Addon FILMOM independente: valida clientes pela base própria clients.json e carrega servidores ativos por servers.json, sem herdar nomes, senhas ou regras de outro addon.</description>
+        <language>pt_BR</language>
+        <platform>all</platform>
+        <license>Proprietary</license>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
