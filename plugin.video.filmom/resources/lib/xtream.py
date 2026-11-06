@@ -118,6 +118,44 @@ def account_info():
     return request_json(api_url(), silent=True) or {}
 
 
+def check_server_status(server):
+    """Retorna online, reachable ou offline sem registrar URL/credenciais.
+
+    ``reachable`` indica que houve resposta HTTP, mas a API não confirmou a
+    autenticação; esse resultado não deve ser confundido com servidor offline.
+    """
+    if not isinstance(server, dict):
+        return "unknown"
+    credentials = config.get_server_credentials(server)
+    base_url = credentials["url"]
+    username = credentials["username"]
+    password = credentials["password"]
+    if not (base_url and username and password):
+        return "unknown"
+
+    url = build_query_url(base_url, "player_api.php", username=username, password=password)
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json,text/plain,*/*"})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout()) as response:
+            raw = response.read().decode("utf-8", "ignore")
+        if not raw:
+            return "reachable"
+        try:
+            data = json.loads(raw)
+        except (TypeError, ValueError):
+            return "reachable"
+        user_info = data.get("user_info") if isinstance(data, dict) else None
+        if isinstance(user_info, dict) and str(user_info.get("auth")) == "1":
+            return "online"
+        return "reachable"
+    except urllib.error.HTTPError as exc:
+        # Autenticação negada ainda prova que o host respondeu; erros 5xx
+        # indicam que o serviço do servidor não está disponível.
+        return "offline" if 500 <= int(exc.code or 0) < 600 else "reachable"
+    except (urllib.error.URLError, socket.timeout, TimeoutError, OSError, ValueError):
+        return "offline"
+
+
 def auth_ok():
     data = account_info()
     try:

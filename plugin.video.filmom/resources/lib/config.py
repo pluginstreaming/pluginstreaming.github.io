@@ -502,6 +502,21 @@ def get_servers(data=None):
     return _all_servers(data)
 
 
+def server_has_credentials(server):
+    return _server_has_credentials(server)
+
+
+def get_server_credentials(server):
+    server = server if isinstance(server, dict) else {}
+    return {
+        "name": server.get("name", "Servidor 1"),
+        "number": server.get("number", _server_number(server.get("name", "Servidor 1"))),
+        "url": normalize_url(server.get("url", "")),
+        "username": server.get("username", ""),
+        "password": _deobfuscate(server.get("password", ""))
+    }
+
+
 def get_active_server(data=None):
     data = data or load_config()
     active = data.get("active_server") or get_setting("active_server_name", "Servidor 1") or "Servidor 1"

@@ -71,6 +71,7 @@ def require_credentials():
 def home():
     active_server = active_server_number()
     add_item("[COLOR gold][B]TROCA DE SERVIDOR[/B][/COLOR] - [ATIVO] %s" % active_server, "servers", media("icon_server.png"), plot="Selecione o servidor ativo por número, sem exibir dados de conta na interface.")
+    add_item("BUSCAR SERVIDORES OFFLINE", "offline_servers", media("icon_server.png"), plot="Verifica todos os servidores habilitados e mostra os que não respondem.")
     add_item("TV AO VIVO", "live_categories", media("icon_live.png"), plot="Canais ao vivo organizados por categoria, com capa e sinopse quando enviados pelo servidor.")
     add_item("FILMES", "vod_categories", media("icon_movies.png"), plot="Catálogo de filmes com posters, informações e sinopse em visual moderno.")
     add_item("SÉRIES", "series_categories", media("icon_series.png"), plot="Séries, temporadas e episódios com metadados e descrição.")
@@ -81,6 +82,61 @@ def home():
 def server_menu():
     config.select_server_dialog()
     home()
+
+
+def find_offline_servers():
+    # Atualiza a lista remota antes da varredura; em caso de falha, a configuração
+    # preserva os servidores válidos já instalados localmente.
+    config.refresh_servers_from_source(use_cache=False)
+    data = config.load_config()
+    servers = [server for server in config.get_servers(data) if config.server_has_credentials(server)]
+    if not servers:
+        xbmcgui.Dialog().ok("FILMOM", "Nenhum servidor habilitado com credenciais completas foi encontrado.")
+        return
+
+    progress = xbmcgui.DialogProgress()
+    progress.create("FILMOM", "Verificando %d servidores..." % len(servers))
+    results = []
+    cancelled = False
+    try:
+        for index, server in enumerate(servers, start=1):
+            name = server.get("name") or "Servidor %s" % (server.get("number") or "?")
+            progress.update(int(index * 100 / len(servers)), "Verificando %s..." % name)
+            if progress.iscanceled():
+                cancelled = True
+                break
+            status = xtream.check_server_status(server)
+            results.append((server, status))
+    finally:
+        progress.close()
+
+    if not results:
+        xbmcgui.Dialog().notification("FILMOM", "Verificação cancelada.", xbmcgui.NOTIFICATION_INFO, 3000)
+        return
+
+    offline = [(server, status) for server, status in results if status == "offline"]
+    online_count = sum(1 for _server, status in results if status == "online")
+    responding_count = sum(1 for _server, status in results if status == "reachable")
+    unverified_count = sum(1 for _server, status in results if status == "unknown")
+
+    if not offline:
+        message = "Nenhum servidor offline encontrado.\nOnline: %d.\nRespondendo sem autenticação válida: %d." % (online_count, responding_count)
+        if unverified_count:
+            message += "\nNão verificados: %d." % unverified_count
+        if cancelled:
+            message = "Verificação parcial. " + message
+        xbmcgui.Dialog().ok("SERVIDORES OFFLINE", message)
+        return
+
+    if cancelled:
+        add_item("[COLOR gold]VERIFICAÇÃO PARCIAL: %d de %d servidores[/COLOR]" % (len(results), len(servers)), icon=media("icon_server.png"), plot="A verificação foi cancelada; os resultados abaixo são parciais.", folder=False)
+    add_item("[COLOR red][B]%d SERVIDOR(ES) OFFLINE[/B][/COLOR]" % len(offline), icon=media("icon_server.png"), plot="Estes servidores não responderam à verificação de rede.", folder=False)
+    for server, _status in offline:
+        name = server.get("name") or "Servidor %s" % (server.get("number") or "?")
+        add_item("[COLOR red][B]OFFLINE[/B][/COLOR] - %s" % name, icon=media("icon_server.png"), plot="O servidor não respondeu à consulta de disponibilidade.", folder=False)
+    if responding_count:
+        add_item("[COLOR gold]%d servidor(es) responderam, mas a API/credencial não foi validada[/COLOR]" % responding_count, icon=media("icon_server.png"), plot="Esses servidores responderam pela rede, mas não confirmaram autenticação válida; não foram classificados como offline.", folder=False)
+    set_view("videos", 55)
 
 
 def player_menu():

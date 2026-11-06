@@ -28,6 +28,8 @@ def dispatch():
         ui.home()
     elif action == "servers":
         ui.server_menu()
+    elif action == "offline_servers":
+        ui.find_offline_servers()
     elif action == "live_categories":
         ui.live_categories()
     elif action == "live_list":
