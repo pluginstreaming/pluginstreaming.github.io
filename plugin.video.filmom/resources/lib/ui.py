@@ -121,6 +121,9 @@ def find_offline_servers():
 
     if not offline:
         message = "Nenhum servidor offline encontrado.\nOnline: %d.\nRespondendo sem autenticação válida: %d." % (online_count, responding_count)
+        if responding_count:
+            responding_names = [server.get("name") or "Servidor %s" % (server.get("number") or "?") for server, status in results if status == "reachable"]
+            message += "\n" + ", ".join(responding_names[:8])
         if unverified_count:
             message += "\nNão verificados: %d." % unverified_count
         if cancelled:
@@ -130,12 +133,16 @@ def find_offline_servers():
 
     if cancelled:
         add_item("[COLOR gold]VERIFICAÇÃO PARCIAL: %d de %d servidores[/COLOR]" % (len(results), len(servers)), icon=media("icon_server.png"), plot="A verificação foi cancelada; os resultados abaixo são parciais.", folder=False)
-    add_item("[COLOR red][B]%d SERVIDOR(ES) OFFLINE[/B][/COLOR]" % len(offline), icon=media("icon_server.png"), plot="Estes servidores não responderam à verificação de rede.", folder=False)
+    add_item("[COLOR red][B]%d SERVIDOR(ES) OFFLINE / INDISPONÍVEIS[/B][/COLOR]" % len(offline), icon=media("icon_server.png"), plot="Não foi possível usar a API Xtream: a conexão falhou, a rota API não existe (HTTP 404/410) ou o serviço retornou erro 5xx.", folder=False)
     for server, _status in offline:
         name = server.get("name") or "Servidor %s" % (server.get("number") or "?")
-        add_item("[COLOR red][B]OFFLINE[/B][/COLOR] - %s" % name, icon=media("icon_server.png"), plot="O servidor não respondeu à consulta de disponibilidade.", folder=False)
-    if responding_count:
-        add_item("[COLOR gold]%d servidor(es) responderam, mas a API/credencial não foi validada[/COLOR]" % responding_count, icon=media("icon_server.png"), plot="Esses servidores responderam pela rede, mas não confirmaram autenticação válida; não foram classificados como offline.", folder=False)
+        add_item("[COLOR red][B]OFFLINE / INDISPONÍVEL[/B][/COLOR] - %s" % name, icon=media("icon_server.png"), plot="A API Xtream desse servidor não está utilizável no momento.", folder=False)
+    responding_servers = [(server, status) for server, status in results if status == "reachable"]
+    if responding_servers:
+        add_item("[COLOR gold]%d SERVIDOR(ES) RESPONDEM, MAS NÃO CONFIRMAM AUTENTICAÇÃO[/COLOR]" % responding_count, icon=media("icon_server.png"), plot="O host respondeu, mas a API não confirmou autenticação válida; pode haver credenciais inválidas ou uma API/rota indisponível.", folder=False)
+        for server, _status in responding_servers:
+            name = server.get("name") or "Servidor %s" % (server.get("number") or "?")
+            add_item("[COLOR gold]RESPONDE / AUTENTICAÇÃO NÃO VALIDADA[/COLOR] - %s" % name, icon=media("icon_server.png"), plot="O servidor respondeu, mas o FILMOM não conseguiu confirmar a autenticação.", folder=False)
     set_view("videos", 55)
 
 

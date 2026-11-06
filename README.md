@@ -18,7 +18,7 @@ https://pluginstreaming.github.io/zips/repository.plugnstreaming.vip-1.0.0.zip
 
 | Addon | ID | Versão |
 |---|---|---|
-| FILMOM | `plugin.video.filmom` | `1.0.27` |
+| FILMOM | `plugin.video.filmom` | `1.0.28` |
 | [COLOR blue]Plugin[/COLOR][COLOR yellow]Streaming[/COLOR] | `plugin.video.pluginstreaming` | `1.1.3+matrix` |
 | PLUGN STREAMING VIP | `plugin.video.plugnstreaming` | `2.2.7` |
 | PLUGINSTREAMING Repository | `repository.plugnstreaming.vip` | `1.0.0` |

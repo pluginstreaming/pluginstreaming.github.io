@@ -1,9 +1,9 @@
 Repositório Kodi montado com sucesso.
 
 Base URL: https://pluginstreaming.github.io
-MD5 addons.xml: cc1fdc91ef27e135507d82c64a1dc73b
+MD5 addons.xml: 63accda539f04513b372e72b96ddf845
 
-plugin.video.filmom | FILMOM | 1.0.27 | zips/plugin.video.filmom/plugin.video.filmom-1.0.27.zip
+plugin.video.filmom | FILMOM | 1.0.28 | zips/plugin.video.filmom/plugin.video.filmom-1.0.28.zip
 plugin.video.pluginstreaming | [COLOR blue]Plugin[/COLOR][COLOR yellow]Streaming[/COLOR] | 1.1.3+matrix | zips/plugin.video.pluginstreaming/plugin.video.pluginstreaming-1.1.3+matrix.zip
 plugin.video.plugnstreaming | PLUGN STREAMING VIP | 2.2.7 | zips/plugin.video.plugnstreaming/plugin.video.plugnstreaming-2.2.7.zip
 repository.plugnstreaming.vip | PLUGINSTREAMING Repository | 1.0.0 | zips/repository.plugnstreaming.vip-1.0.0.zip

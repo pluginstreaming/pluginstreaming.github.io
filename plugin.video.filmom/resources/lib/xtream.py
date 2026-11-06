@@ -149,9 +149,11 @@ def check_server_status(server):
             return "online"
         return "reachable"
     except urllib.error.HTTPError as exc:
-        # Autenticação negada ainda prova que o host respondeu; erros 5xx
-        # indicam que o serviço do servidor não está disponível.
-        return "offline" if 500 <= int(exc.code or 0) < 600 else "reachable"
+        # 404/410 significam que a API Xtream configurada não existe mais nesse
+        # endereço; 5xx indicam indisponibilidade do serviço. 401/403 provam
+        # que o host respondeu, mas que a autenticação foi negada.
+        code = int(exc.code or 0)
+        return "offline" if code in (404, 410) or 500 <= code < 600 else "reachable"
     except (urllib.error.URLError, socket.timeout, TimeoutError, OSError, ValueError):
         return "offline"
 

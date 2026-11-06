@@ -77,6 +77,16 @@ class ServerStatusTests(unittest.TestCase):
         with mock.patch.object(xtream.urllib.request, "urlopen", side_effect=error):
             self.assertEqual(xtream.check_server_status(server()), "reachable")
 
+    def test_forbidden_http_error_means_host_responded(self):
+        error = urllib.error.HTTPError("http://media.example.test", 403, "Forbidden", {}, None)
+        with mock.patch.object(xtream.urllib.request, "urlopen", side_effect=error):
+            self.assertEqual(xtream.check_server_status(server()), "reachable")
+
+    def test_missing_api_http_error_is_offline(self):
+        error = urllib.error.HTTPError("http://media.example.test", 404, "Not Found", {}, None)
+        with mock.patch.object(xtream.urllib.request, "urlopen", side_effect=error):
+            self.assertEqual(xtream.check_server_status(server()), "offline")
+
     def test_server_error_is_offline(self):
         error = urllib.error.HTTPError("http://media.example.test", 503, "Unavailable", {}, None)
         with mock.patch.object(xtream.urllib.request, "urlopen", side_effect=error):
