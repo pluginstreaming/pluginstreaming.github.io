@@ -6,6 +6,7 @@ from __future__ import absolute_import, unicode_literals
 import base64
 import os
 import sys
+import time
 import types
 import unittest
 import urllib.error
@@ -67,20 +68,31 @@ class ServerStatusTests(unittest.TestCase):
         with mock.patch.object(xtream.urllib.request, "urlopen", return_value=response):
             self.assertEqual(xtream.check_server_status(server()), "online")
 
-    def test_invalid_api_authentication_is_reachable_not_offline(self):
+    def test_disabled_account_is_offline(self):
+        response = FakeResponse(b'{"user_info":{"auth":1,"status":"Disabled"}}')
+        with mock.patch.object(xtream.urllib.request, "urlopen", return_value=response):
+            self.assertEqual(xtream.check_server_status(server()), "offline")
+
+    def test_expired_account_is_offline(self):
+        expired = int(time.time()) - 3600
+        response = FakeResponse(("{\"user_info\":{\"auth\":1,\"status\":\"Active\",\"exp_date\":\"%d\"}}" % expired).encode("ascii"))
+        with mock.patch.object(xtream.urllib.request, "urlopen", return_value=response):
+            self.assertEqual(xtream.check_server_status(server()), "offline")
+
+    def test_invalid_api_authentication_is_offline_for_addon_use(self):
         response = FakeResponse(b'{"user_info":{"auth":0}}')
         with mock.patch.object(xtream.urllib.request, "urlopen", return_value=response):
-            self.assertEqual(xtream.check_server_status(server()), "reachable")
+            self.assertEqual(xtream.check_server_status(server()), "offline")
 
-    def test_auth_http_error_means_host_responded(self):
+    def test_auth_http_error_is_offline_for_addon_use(self):
         error = urllib.error.HTTPError("http://media.example.test", 401, "Unauthorized", {}, None)
         with mock.patch.object(xtream.urllib.request, "urlopen", side_effect=error):
-            self.assertEqual(xtream.check_server_status(server()), "reachable")
+            self.assertEqual(xtream.check_server_status(server()), "offline")
 
-    def test_forbidden_http_error_means_host_responded(self):
+    def test_forbidden_http_error_is_offline_for_addon_use(self):
         error = urllib.error.HTTPError("http://media.example.test", 403, "Forbidden", {}, None)
         with mock.patch.object(xtream.urllib.request, "urlopen", side_effect=error):
-            self.assertEqual(xtream.check_server_status(server()), "reachable")
+            self.assertEqual(xtream.check_server_status(server()), "offline")
 
     def test_missing_api_http_error_is_offline(self):
         error = urllib.error.HTTPError("http://media.example.test", 404, "Not Found", {}, None)

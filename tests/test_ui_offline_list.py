@@ -115,9 +115,9 @@ class OfflineServerListTests(unittest.TestCase):
         self.assertEqual(_DIRECTORY_ITEMS, [
             "[COLOR red][B]SERVIDORES OFF[/B][/COLOR]",
             "[COLOR red][B]1[/B][/COLOR]",
+            "[COLOR red][B]2[/B][/COLOR]",
             "[COLOR red][B]4[/B][/COLOR]",
             "[COLOR green][B]SERVIDORES ON[/B][/COLOR]",
-            "[COLOR green][B]2[/B][/COLOR]",
             "[COLOR green][B]3[/B][/COLOR]",
         ])
 

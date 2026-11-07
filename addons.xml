@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.video.filmom" name="FILMOM" version="1.0.29" provider-name="FILMOM">
+<addon id="plugin.video.filmom" name="FILMOM" version="1.0.30" provider-name="FILMOM">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>

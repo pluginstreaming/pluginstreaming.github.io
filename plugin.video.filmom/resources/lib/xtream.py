@@ -119,10 +119,10 @@ def account_info():
 
 
 def check_server_status(server):
-    """Retorna online, reachable ou offline sem registrar URL/credenciais.
+    """Retorna online somente quando a API confirma conta válida e ativa.
 
-    ``reachable`` indica que houve resposta HTTP, mas a API não confirmou a
-    autenticação; esse resultado não deve ser confundido com servidor offline.
+    Um host que responde, mas rejeita a autenticação, não está disponível para
+    uso no addon e deve ser mostrado como offline. Nenhuma credencial é logada.
     """
     if not isinstance(server, dict):
         return "unknown"
@@ -145,15 +145,22 @@ def check_server_status(server):
         except (TypeError, ValueError):
             return "reachable"
         user_info = data.get("user_info") if isinstance(data, dict) else None
-        if isinstance(user_info, dict) and str(user_info.get("auth")) == "1":
-            return "online"
-        return "reachable"
-    except urllib.error.HTTPError as exc:
-        # 404/410 significam que a API Xtream configurada não existe mais nesse
-        # endereço; 5xx indicam indisponibilidade do serviço. 401/403 provam
-        # que o host respondeu, mas que a autenticação foi negada.
-        code = int(exc.code or 0)
-        return "offline" if code in (404, 410) or 500 <= code < 600 else "reachable"
+        if not isinstance(user_info, dict) or str(user_info.get("auth")) != "1":
+            return "offline"
+        account_status = str(user_info.get("status") or "").strip().lower()
+        if account_status and account_status not in ("active", "enabled", "online", "1"):
+            return "offline"
+        expiration = str(user_info.get("exp_date") or "").strip()
+        try:
+            if expiration and expiration != "0" and int(expiration) < int(time.time()):
+                return "offline"
+        except (TypeError, ValueError):
+            pass
+        return "online"
+    except urllib.error.HTTPError:
+        # HTTP 401/403 provam que o host respondeu, mas também que as
+        # credenciais não estão autorizadas; o servidor não está utilizável.
+        return "offline"
     except (urllib.error.URLError, socket.timeout, TimeoutError, OSError, ValueError):
         return "offline"
 

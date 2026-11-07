@@ -114,8 +114,8 @@ def find_offline_servers():
         xbmcgui.Dialog().notification("FILMOM", "Verificação cancelada.", xbmcgui.NOTIFICATION_INFO, 3000)
         return
 
-    offline = [server for server, status in results if status == "offline"]
-    online = [(server, status) for server, status in results if status in ("online", "reachable")]
+    offline = [server for server, status in results if status != "online"]
+    online = [(server, status) for server, status in results if status == "online"]
     add_item("[COLOR red][B]SERVIDORES OFF[/B][/COLOR]", icon=media("icon_server.png"), plot="Lista dos números de servidores cuja API Xtream está indisponível.", folder=False)
     if offline:
         for server in offline:
@@ -125,9 +125,9 @@ def find_offline_servers():
         add_item("Nenhum", icon=media("icon_server.png"), plot="Nenhum servidor offline foi encontrado nesta verificação.", folder=False)
     add_item("[COLOR green][B]SERVIDORES ON[/B][/COLOR]", icon=media("icon_server.png"), plot="Lista dos números de servidores online ou que respondem pela rede.", folder=False)
     if online:
-        for server, status in online:
+        for server, _status in online:
             number = str(server.get("number") or config._server_number(server.get("name") or "1"))
-            plot = "Servidor %s online." % number if status == "online" else "Servidor %s responde pela rede, mas a autenticação não foi confirmada." % number
+            plot = "Servidor %s autenticado e disponível." % number
             add_item("[COLOR green][B]%s[/B][/COLOR]" % number, icon=media("icon_server.png"), plot=plot, folder=False)
     else:
         add_item("Nenhum", icon=media("icon_server.png"), plot="Nenhum servidor online foi confirmado nesta verificação.", folder=False)
